@@ -1,11 +1,20 @@
 package org.mskcc.cbio.maf;
 
+/**
+ * Utility methods for detecting and converting simple scalar value types.
+ */
 public class ValueTypeUtil {
 
     private ValueTypeUtil() {
         throw new IllegalStateException("This is a utility class. Do not instantiate.");
     }
 
+    /**
+     * Checks whether the supplied string can be parsed as an integer.
+     *
+     * @param value the value to inspect
+     * @return {@code true} when the value parses as an integer
+     */
     public static boolean isInt(String value) {
         if (value == null) {
             return false;
@@ -18,6 +27,12 @@ public class ValueTypeUtil {
         return true;
     }
 
+    /**
+     * Checks whether the supplied string can be parsed as a float.
+     *
+     * @param value the value to inspect
+     * @return {@code true} when the value parses as a float
+     */
     public static boolean isFloat(String value) {
         if (value == null) {
             return false;
@@ -30,6 +45,12 @@ public class ValueTypeUtil {
         return true;
     }
 
+    /**
+     * Checks whether the supplied string can be parsed as a double.
+     *
+     * @param value the value to inspect
+     * @return {@code true} when the value parses as a double
+     */
     public static boolean isDouble(String value) {
         if (value == null) {
             return false;
@@ -42,6 +63,12 @@ public class ValueTypeUtil {
         return true;
     }
 
+    /**
+     * Converts a supported numeric or numeric-string value to a float.
+     *
+     * @param value the value to convert
+     * @return the converted float, or {@code null} when the input is {@code null}
+     */
     public static Float toFloat(Object value) {
         if (value == null) {
             return null;
@@ -64,6 +91,12 @@ public class ValueTypeUtil {
         throw new RuntimeException("Object type not covered by toFloat method. Value is: " + value.toString());
     }
 
+    /**
+     * Converts a supported numeric or numeric-string value to an integer.
+     *
+     * @param value the value to convert
+     * @return the converted integer, or {@code null} when the input is {@code null}
+     */
     public static Integer toInt(Object value) {
         if (value == null) {
             return null;

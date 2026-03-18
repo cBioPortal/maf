@@ -727,14 +727,18 @@ public class MafUtil {
     }
 
     /**
-     * Resolve tumor seq allele given a reference allele, tumor seq allele1, and tumor seq allele2.
-     * Valid nucleotide patterns will be preferred over "-" in cases where there is ambiguity over which tumor seq allele value (1 or 2) to use.
-     * @param referenceAllele
-     * @param tumorSeqAllele1
-     * @param tumorSeqAllele2
-     * @return
+     * Resolves the tumor sequencing allele using the reference allele and the two
+     * tumor allele columns from a MAF record.
      *
-     * @author angelicaochoa
+     * <p>When both tumor allele columns differ from the reference allele, valid
+     * nucleotide patterns are preferred over {@code -} to disambiguate the stored
+     * alternate allele.
+     *
+     * @param referenceAllele the reference allele from the record
+     * @param tumorSeqAllele1 the first tumor sequencing allele
+     * @param tumorSeqAllele2 the second tumor sequencing allele
+     * @return the resolved tumor sequencing allele, or an empty string when neither
+     *         tumor allele is usable
      */
     public static String resolveTumorSeqAllele(String referenceAllele, String tumorSeqAllele1, String tumorSeqAllele2) {
         // sanity check tumor seq allele 1 and 2 for valid/non-null values
@@ -753,14 +757,15 @@ public class MafUtil {
     }
 
     /**
-     * Determines where record contains both a valid nucleotide pattern and "-".
-     * Helper function for resolveTumorSeqAllele(...)
-     * @param referenceAllele
-     * @param tumorSeqAllele1
-     * @param tumorSeqAllele2
-     * @return
+     * Determines whether the tumor allele columns contain both a valid nucleotide
+     * pattern and {@code -}, which indicates an ambiguous alternate allele choice.
      *
-     * @author angelicaochoa
+     * @param referenceAllele the reference allele from the record
+     * @param tumorSeqAllele1 the first tumor sequencing allele
+     * @param tumorSeqAllele2 the second tumor sequencing allele
+     * @return {@code true} when one tumor allele is {@code -} and the other is a
+     *         valid nucleotide pattern that differs from the reference allele;
+     *         otherwise {@code false}
      */
     public static boolean variantContainsAmbiguousTumorSeqAllele(String referenceAllele, String tumorSeqAllele1, String tumorSeqAllele2) {
         // tumor seq allele 1 or 2 is null type or equal to ref allele - return false
@@ -778,4 +783,3 @@ public class MafUtil {
     }
 
 }
-
